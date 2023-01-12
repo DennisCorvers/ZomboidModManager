@@ -5,28 +5,28 @@ namespace ZomboidModPicker.Repository
 {
     public class ModInfo
     {
-        public string Name { get; }
+        public string[] ModIds { get; }
 
-        public string[] Ids { get; }
+        public string WorkshopId { get; }
 
         [JsonIgnore]
-        public string IdsString
-            => string.Join(';', Ids);
+        public string ModIdsString
+            => string.Join(';', ModIds);
 
-        public ModInfo(string name, string ids)
-            : this(name, ids.Split(';'))
+        public ModInfo(string modids, string workshopid)
+            : this(modids.Split(';'), workshopid)
         { }
 
         [JsonConstructor]
-        public ModInfo(string name, string[] ids)
+        public ModInfo(string[] modids, string workshopid)
         {
-            if (ids.Length == 0)
+            if (modids.Length == 0)
             {
-                throw new ArgumentException("Mod requires at least one workshop Id.");
+                throw new ArgumentException("Mod requires at least one mod Id.");
             }
 
-            Name = name;
-            Ids = ids;
+            ModIds = modids;
+            WorkshopId = workshopid;
         }
     }
 }

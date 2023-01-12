@@ -26,7 +26,9 @@ namespace ZomboidModPicker.Repository
         {
             var sb = new StringBuilder();
             sb.Append("Mods=");
-            sb.Append(string.Join(';', Mods.Select(x => x.Name)));
+
+            var modIds = Mods.Select(x => x.ModIdsString);
+            sb.Append(string.Join(';', modIds));
             return sb.ToString();
         }
 
@@ -35,8 +37,7 @@ namespace ZomboidModPicker.Repository
             var sb = new StringBuilder();
             sb.Append("Workshopitems=");
 
-            var modIds = Mods.Select(x => x.IdsString);
-            sb.Append(string.Join(';', modIds));
+            sb.Append(string.Join(';', Mods.Select(x => x.WorkshopId)));
             return sb.ToString();
         }
     }

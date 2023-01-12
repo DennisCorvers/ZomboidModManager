@@ -31,8 +31,8 @@
             </Grid.ColumnDefinitions>
             <DataGrid Name="ModGrid" Grid.Column="0" IsReadOnly="true" SelectionMode="Extended"  SelectionUnit="FullRow" Margin="5">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="1*" Binding="{Binding Name}" Header="Mod Name"/>
-                    <DataGridTextColumn Width="1*" Binding="{Binding IdsString}" Header="Workshop Id(s)"/>
+                    <DataGridTextColumn Width="1*" Binding="{Binding ModIdsString}" Header="Mod Name"/>
+                    <DataGridTextColumn Width="1*" Binding="{Binding WorkshopId}" Header="Workshop Id(s)"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Margin="0,0,0,5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" >

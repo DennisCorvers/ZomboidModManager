@@ -20,9 +20,9 @@ namespace ZomboidModPicker
 
         public void SetWindow(ModInfo modInfo)
         {
-            TempMod = new ModInfo(modInfo.Name, modInfo.Ids);
-            TbModName.Text = TempMod.Name;
-            TbModId.Text = TempMod.IdsString;
+            TempMod = new ModInfo(modInfo.ModIdsString, modInfo.WorkshopId);
+            TbModName.Text = TempMod.ModIdsString;
+            TbModId.Text = TempMod.WorkshopId;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -30,14 +30,14 @@ namespace ZomboidModPicker
             string name = TbModName.Text;
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show("Mod must have a name.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Mod ID must contain at least one ID.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             string idText = TbModId.Text;
             if (string.IsNullOrWhiteSpace(idText))
             {
-                MessageBox.Show("Mod Id must contain at least one Id.", "Invalid Id", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Workshop ID may not be empty.", "Invalid Id", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

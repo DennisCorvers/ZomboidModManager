@@ -8,8 +8,7 @@ namespace ZomboidModPicker.Utilities
     {
         public static void NavigateToWorkshop(ModInfo mod)
         {
-            var workshopId = mod.Ids.First();
-            var url = $"https://steamcommunity.com/sharedfiles/filedetails/?id={workshopId}";
+            var url = $"https://steamcommunity.com/sharedfiles/filedetails/?id={mod.WorkshopId}";
             _ = Process.Start(new ProcessStartInfo(url)
             {
                 UseShellExecute = true
