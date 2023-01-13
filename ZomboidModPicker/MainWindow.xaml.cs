@@ -96,11 +96,7 @@ namespace ZomboidModPicker
             var isUpdating = ModGrid.SelectedItems.Count > 0;
             var selectedMod = ModGrid.SelectedItem as ModInfo;
 
-            if (isUpdating)
-            {
-                form.SetWindow(selectedMod);
-            }
-
+            form.SetWindow(selectedMod);
             form.ShowDialog();
 
             if (form.HasUpdate)

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ZomboidModPicker.Repository;
@@ -10,7 +11,7 @@ namespace ZomboidModPicker
     /// </summary>
     public partial class NewItemForm : Window
     {
-        internal ModInfo TempMod { get; private set; }
+        internal ModInfo? TempMod { get; private set; }
         internal bool HasUpdate { get; private set; }
 
         public NewItemForm()
@@ -18,14 +19,26 @@ namespace ZomboidModPicker
             InitializeComponent();
         }
 
-        public void SetWindow(ModInfo modInfo)
+        public void SetWindow(ModInfo? modInfo)
         {
-            TempMod = new ModInfo(modInfo.ModIdsString, modInfo.WorkshopId);
-            TbModName.Text = TempMod.ModIdsString;
-            TbModId.Text = TempMod.WorkshopId;
+            HasUpdate = false;
+            if (modInfo == null)
+            {
+                Title = "Adding new mod";
+                TempMod = null;
+                TbModName.Text = string.Empty;
+                TbModId.Text = string.Empty;
+            }
+            else
+            {
+                Title = $"Editing '{modInfo.ModIds.First()}'";
+                TempMod = new ModInfo(modInfo.ModIdsString, modInfo.WorkshopId);
+                TbModName.Text = TempMod.ModIdsString;
+                TbModId.Text = TempMod.WorkshopId;
+            }
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void Add()
         {
             string name = TbModName.Text;
             if (string.IsNullOrWhiteSpace(name))
@@ -46,13 +59,27 @@ namespace ZomboidModPicker
             Close();
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel()
         {
             TempMod = null;
             HasUpdate = false;
 
             Close();
         }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                Add();
+            }
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+            => Add();
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+            => Cancel();
 
         private void Window_Loaded(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -64,9 +91,6 @@ namespace ZomboidModPicker
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            TbModId.Text = "";
-            TbModName.Text = "";
-
             e.Cancel = true;
             FocusManager.SetFocusedElement(this, TbModName);
             Visibility = Visibility.Hidden;
