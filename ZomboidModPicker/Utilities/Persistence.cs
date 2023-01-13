@@ -72,7 +72,7 @@ namespace ZomboidModPicker
             {
                 var fileName = dialog.FileName;
                 Save(data, fileName);
-                return SaveState.FromSuccess(Path.GetFileNameWithoutExtension(fileName));
+                return SaveState.FromSuccess(fileName);
             }
             else
             {
