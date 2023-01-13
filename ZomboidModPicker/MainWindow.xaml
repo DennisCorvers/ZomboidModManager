@@ -30,7 +30,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition MinWidth="100" MaxWidth="150"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Name="ModGrid" Grid.Column="0" IsReadOnly="true" SelectionMode="Extended"  SelectionUnit="FullRow" Margin="5">
+            <DataGrid Name="ModGrid" Grid.Column="0" IsReadOnly="true" SelectionMode="Extended" SelectionUnit="FullRow" Margin="5"
+                      KeyUp="ModGrid_KeyUp" CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="1*" Binding="{Binding ModIdsString}" Header="Mod Name"/>
                     <DataGridTextColumn Width="1*" Binding="{Binding WorkshopId}" Header="Workshop Id(s)"/>

@@ -152,6 +152,14 @@ namespace ZomboidModPicker
             }
         }
 
+        private void ModGrid_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                ModGrid.SelectedIndex = -1;
+            }
+        }
+
         private bool TryGetSelectedItem(out ModInfo? modInfo)
         {
             var selection = ModGrid.SelectedItems;
