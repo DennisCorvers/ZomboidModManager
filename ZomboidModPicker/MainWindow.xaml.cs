@@ -42,9 +42,9 @@ namespace ZomboidModPicker
             ModGrid.Items.Clear();
 
             m_data = data;
-            foreach (var modi in m_data.Mods)
+            foreach (var mod in m_data.Mods)
             {
-                _ = ModGrid.Items.Add(modi);
+                _ = ModGrid.Items.Add(mod);
             }
         }
 
@@ -86,14 +86,13 @@ namespace ZomboidModPicker
             if (TryGetSelectedItem(out var modInfo))
             {
                 ModGrid.Items.Remove(modInfo);
-                m_data.Mods.Remove(modInfo);
+                m_data.Remove(modInfo);
             }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var form = NewItemForm;
-            var isUpdating = ModGrid.SelectedItems.Count > 0;
             var selectedMod = ModGrid.SelectedItem as ModInfo;
 
             form.SetWindow(selectedMod);
@@ -101,17 +100,16 @@ namespace ZomboidModPicker
 
             if (form.HasUpdate)
             {
-                if (isUpdating)
+                if (m_data.Insert(form.TempMod, ModGrid.SelectedIndex))
                 {
-                    m_data.Mods[ModGrid.SelectedIndex] = form.TempMod;
+                    ReloadUI(m_data);
                 }
                 else
                 {
-                    m_data.Mods.Add(form.TempMod);
+                    MessageBox.Show($"Mod with Workshop ID {form.TempMod.WorkshopId} already added.",
+                        "Duplicate ID", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
-            ReloadUI(m_data);
         }
 
         private void btnUp_Click(object sender, RoutedEventArgs e)
@@ -120,7 +118,7 @@ namespace ZomboidModPicker
                 return;
 
             var selectedIndex = ModGrid.SelectedIndex;
-            if (m_data.Mods.MoveUp(selectedIndex))
+            if (m_data.ShiftItem(-selectedIndex))
             {
                 ReloadUI(m_data);
                 ModGrid.SelectedIndex = selectedIndex - 1;
@@ -133,7 +131,7 @@ namespace ZomboidModPicker
                 return;
 
             var selectedIndex = ModGrid.SelectedIndex;
-            if (m_data.Mods.MoveDown(ModGrid.SelectedIndex))
+            if (m_data.ShiftItem(ModGrid.SelectedIndex))
             {
                 ReloadUI(m_data);
                 ModGrid.SelectedIndex = selectedIndex + 1;
