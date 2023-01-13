@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using TextCopy;
 using ZomboidModPicker.Repository;
 using ZomboidModPicker.UI;
 using ZomboidModPicker.Utilities;
@@ -139,10 +140,10 @@ namespace ZomboidModPicker
         }
 
         private void btnCopyIds_Click(object sender, RoutedEventArgs e)
-            => Clipboard.SetDataObject(m_data.ExportIds(), true);
+            => ClipboardService.SetText(m_data.ExportIds());
 
         private void btnCopyNames_Click(object sender, RoutedEventArgs e)
-            => Clipboard.SetDataObject(m_data.ExportNames(), true);
+            => ClipboardService.SetText(m_data.ExportNames());
 
         private void btnWorkshop_Click(object sender, RoutedEventArgs e)
         {
