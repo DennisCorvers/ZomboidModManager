@@ -139,10 +139,10 @@ namespace ZomboidModPicker
         }
 
         private void btnCopyIds_Click(object sender, RoutedEventArgs e)
-            => Clipboard.SetText(m_data.ExportIds());
+            => Clipboard.SetDataObject(m_data.ExportIds(), true);
 
         private void btnCopyNames_Click(object sender, RoutedEventArgs e)
-            => Clipboard.SetText(m_data.ExportNames());
+            => Clipboard.SetDataObject(m_data.ExportNames(), true);
 
         private void btnWorkshop_Click(object sender, RoutedEventArgs e)
         {
