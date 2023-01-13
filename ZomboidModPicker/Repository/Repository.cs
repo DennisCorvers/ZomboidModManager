@@ -85,7 +85,7 @@ namespace ZomboidModPicker.Repository
         public string ExportIds()
         {
             var sb = new StringBuilder();
-            sb.Append("Workshopitems=");
+            sb.Append("WorkshopItems=");
 
             sb.Append(string.Join(';', Mods.Select(x => x.WorkshopId)));
             return sb.ToString();
