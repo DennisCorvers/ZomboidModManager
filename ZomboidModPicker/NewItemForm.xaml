@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZomboidModPicker"
         mc:Ignorable="d"
-        Title="NewItemForm"
-        ShowInTaskbar="False"
-        Closing="Window_Closing" IsVisibleChanged="Window_Loaded" Height="190" Width="420" >
+        Title="Add/Change mod"
+        ShowInTaskbar="True"
+        Closing="Window_Closing" IsVisibleChanged="Window_Loaded" Height="190" Width="420" Icon="/Untitled.png" WindowStartupLocation="CenterOwner" >
     <StackPanel Orientation="Vertical" Margin="10,20,10,10" VerticalAlignment="Stretch">
         <Grid Height="60">
             <Grid.ColumnDefinitions>
